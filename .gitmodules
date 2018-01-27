@@ -1,0 +1,12 @@
+[submodule "libs/lnx"]
+	path = libs/lnx
+	url = https://github.com/cppstack/lnx
+[submodule "libs/logging"]
+	path = libs/logging
+	url = https://github.com/cppstack/logging
+[submodule "libs/program_options"]
+	path = libs/program_options
+	url = https://github.com/cppstack/program_options
+[submodule "libs/progress_bar"]
+	path = libs/progress_bar
+	url = https://github.com/cppstack/progress_bar

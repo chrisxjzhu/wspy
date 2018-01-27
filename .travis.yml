@@ -1,0 +1,22 @@
+dist: trusty
+sudo: required
+language: cpp
+
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+
+before_script:
+  - if [[ "$CXX" == "g++" ]]; then export CC=gcc-7 CXX=g++-7; fi
+
+script:
+  - mkdir build && cd build
+  - cmake ..
+  - make
+  - make test
