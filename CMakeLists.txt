@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.6)
 project(wspy)
 
+option(WSPY_BUILD_TEST "build test" OFF)
+
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -24,3 +26,7 @@ add_custom_target(simple_test.sh ALL
 
 enable_testing()
 add_test(simple_test simple_test.sh)
+
+if(WSPY_BUILD_TEST)
+    add_subdirectory(test)
+endif()
