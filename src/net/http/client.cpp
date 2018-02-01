@@ -39,10 +39,10 @@ response client::execute(request& req)
 
 std::shared_ptr<cst::lnx::socket> client::connect(const request& req)
 {
-    std::shared_ptr<cst::lnx::socket> sock = std::make_shared<cst::lnx::socket>();
+    std::shared_ptr<cst::lnx::socket> sock = std::make_shared<cst::lnx::socket>(AF_INET, SOCK_STREAM, 0);
 
     if (https_proxy_ && req.ssl()) {
-        *sock = cst::lnx::socket::tcp_connect(https_proxy_.host(), https_proxy_.port());
+        sock->connect(https_proxy_.host(), https_proxy_.port());
 
         std::string arg = req.host() + ":" + std::to_string(req.port());
         request creq("CONNECT", arg, req.host(), req.port(), req.ssl());
@@ -52,9 +52,9 @@ std::shared_ptr<cst::lnx::socket> client::connect(const request& req)
            throw error("ssl proxy tunneling error");
 
     } else if (http_proxy_ && ! req.ssl()) {
-        *sock = cst::lnx::socket::tcp_connect(http_proxy_.host(), http_proxy_.port());
+        sock->connect(http_proxy_.host(), http_proxy_.port());
     } else {
-        *sock = cst::lnx::socket::tcp_connect(req.host(), req.port());
+        sock->connect(req.host(), req.port());
     }
 
     if (req.ssl()) {
