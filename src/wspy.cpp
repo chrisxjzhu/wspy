@@ -1,10 +1,7 @@
 #include <cst/program_options.hpp>
 #include <cst/progress/bar.hpp>
 #include <cst/progress/simple_view.hpp>
-#include <cst/logging/logger/trivial_logger.hpp>
-#include <cst/logging/message/raw_message.hpp>
-#include <cst/logging/sink/stderr_sink.hpp>
-#include <cst/logging/formatter/simple_formatter.hpp>
+#include <cst/logging/logger/trivial_loggers.hpp>
 
 #include <iostream>
 #include <cstdio>
@@ -20,10 +17,7 @@ namespace logging = cst::logging;
 po::options_description desc("wspy");
 po::variables_map vm;
 
-auto logger = std::make_shared<logging::trivial_logger<logging::raw_message>>(
-              "wspy",
-              std::make_shared<logging::stderr_sink>(),
-              std::make_shared<logging::simple_formatter>());
+auto logger = logging::trivial_stderr_logger("wspy");
 
 struct wspy_option {
     std::string method;

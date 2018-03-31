@@ -9,4 +9,4 @@ add_executable(wspy
                )
 target_include_directories(wspy PRIVATE ./)
 target_compile_options(wspy PRIVATE -Wall -Wextra -Wpointer-arith)
-target_link_libraries(wspy lnx logging program_options progress_bar)
+target_link_libraries(wspy cst_lnx cst_logging cst_program_options progress_bar)
